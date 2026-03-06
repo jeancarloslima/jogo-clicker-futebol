@@ -1,5 +1,7 @@
-export default function TelaClicker() {
+export default function TelaClicker({ noClique }) {
     return (
-        <h1>Tela Clicker</h1>
+        <div className="clicker-container">
+            <button onClick={noClique}>Clique em mim!</button>
+        </div>
     )
 }
