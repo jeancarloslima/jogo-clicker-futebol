@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import './App.css'
+import TelaClicker from './components/TelaClicker';
+import TelaTime from './components/TelaTime';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -17,8 +19,8 @@ function App() {
 
       <main>
         <div className="main-container">
-          <TelaClicker />
-          <TelaTime />
+          {telaAtual === 0 && <TelaClicker />}
+          {telaAtual === 1 && <TelaTime />}
         </div>
       </main>
     </div>
