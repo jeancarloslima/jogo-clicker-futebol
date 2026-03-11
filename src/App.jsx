@@ -2,6 +2,8 @@ import { useState } from 'react'
 import './App.css'
 import TelaClicker from './components/TelaClicker';
 import TelaTime from './components/TelaTime';
+import TelaMelhorias from './components/TelaMelhorias';
+import TelaJogadores from './components/TelaJogadores';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -27,6 +29,13 @@ function App() {
           {telaAtual === 1 && <TelaTime />}
         </div>
       </main>
+
+      <footer>
+        <div className="footer-container">
+          {telaAtual === 0 && <TelaMelhorias />}
+          {telaAtual === 1 && <TelaJogadores />}
+        </div>
+      </footer>
     </div>
   )
 }
