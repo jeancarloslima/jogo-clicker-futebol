@@ -22,8 +22,8 @@ function App() {
     <div className="app">
       <header>
         <div className="header-container">
-          <h2 className="contagem">{count} <RiMoneyDollarCircleFill /></h2>
           <h3 className="dias-faltando">{diasFaltando} <FaCalendar /></h3>
+          <h2 className="contagem">{count} <RiMoneyDollarCircleFill /></h2>
           <h3 className="forca-time">{forcaTime} <GiSoccerKick /></h3>
         </div>
       </header>

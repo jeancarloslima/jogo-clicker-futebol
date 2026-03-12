@@ -1,3 +1,7 @@
+.clicker-container {
+    margin: auto;
+}
+
 .botao-click {
     display: flex;
     align-items: center;
