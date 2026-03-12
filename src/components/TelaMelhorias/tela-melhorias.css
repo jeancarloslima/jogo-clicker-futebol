@@ -10,10 +10,25 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    height: 40px;
+    height: 60px;
     padding: 0 .8rem;
     background-color: #ffffffde;
     color: #242424;
     font-weight: 600;
     cursor: pointer;
+}
+
+.nome-melhoria {
+    min-width: 180px;
+    text-align: left;
+}
+
+.custo-melhoria {
+    min-width: 50px;
+    text-align: left;
+}
+
+.efeito-melhoria {
+    min-width: 60px;
+    text-align: right;
 }
