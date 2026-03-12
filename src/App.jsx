@@ -9,13 +9,15 @@ import { RiMoneyDollarCircleFill } from 'react-icons/ri';
 import { GiSoccerKick } from 'react-icons/gi';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0.0);
+  const [multiplicador, setMultiplicador] = useState(0.1);
   const [diasFaltando, setDiasFaltando] = useState(30);
   const [forcaTime, setForcaTime] = useState(100);
   const [telaAtual, setTelaAtual] = useState(0);
 
   function handleClick() {
-    setCount(count + 1);
+    const novoValor = Number((count + multiplicador).toFixed(1));
+    setCount(novoValor);
   }
 
   return (

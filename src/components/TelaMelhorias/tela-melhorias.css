@@ -1,0 +1,19 @@
+.lista-melhorias {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+}
+
+.item-melhoria {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 40px;
+    padding: 0 .8rem;
+    background-color: #ffffffde;
+    color: #242424;
+    font-weight: 600;
+    cursor: pointer;
+}
