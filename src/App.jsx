@@ -1,12 +1,12 @@
-import { useState } from 'react'
-import './App.css'
-import TelaClicker from './components/TelaClicker';
-import TelaTime from './components/TelaTime';
-import TelaMelhorias from './components/TelaMelhorias';
-import TelaJogadores from './components/TelaJogadores';
+import { useState } from "react";
+import "./App.css";
+import TelaClicker from "./components/TelaClicker";
+import TelaTime from "./components/TelaTime";
+import TelaMelhorias from "./components/TelaMelhorias";
+import TelaJogadores from "./components/TelaJogadores";
 import { FaCalendar } from "react-icons/fa6";
-import { RiMoneyDollarCircleFill } from 'react-icons/ri';
-import { GiSoccerKick } from 'react-icons/gi';
+import { RiMoneyDollarCircleFill } from "react-icons/ri";
+import { GiSoccerKick } from "react-icons/gi";
 
 function App() {
   const [count, setCount] = useState(0.0);
@@ -21,18 +21,31 @@ function App() {
     if (!Number.isInteger(novoValor)) {
       setCount(novoValor);
     } else {
-      setCount(novoValor + ".0")
+      setCount(novoValor + ".0");
     }
-    
+
+    function diminuiDia() {
+      setDiasFaltando(diasFaltando - 1);
+    }
+
+    setInterval(() => {
+      diminuiDia();
+    }, 60000);
   }
 
   return (
     <div className="app">
       <header>
         <div className="header-container">
-          <h3 className="dias-faltando">{diasFaltando} <FaCalendar /></h3>
-          <h2 className="contagem">{count} <RiMoneyDollarCircleFill /></h2>
-          <h3 className="forca-time">{forcaTime} <GiSoccerKick /></h3>
+          <h3 className="dias-faltando">
+            {diasFaltando} <FaCalendar />
+          </h3>
+          <h2 className="contagem">
+            {count} <RiMoneyDollarCircleFill />
+          </h2>
+          <h3 className="forca-time">
+            {forcaTime} <GiSoccerKick />
+          </h3>
         </div>
       </header>
 
@@ -50,7 +63,7 @@ function App() {
         </div>
       </footer>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
