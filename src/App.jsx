@@ -16,8 +16,14 @@ function App() {
   const [telaAtual, setTelaAtual] = useState(0);
 
   function handleClick() {
-    const novoValor = Number((count + multiplicador).toFixed(1));
-    setCount(novoValor);
+    const novoValor = Number((Number(count) + multiplicador).toFixed(1));
+
+    if (!Number.isInteger(novoValor)) {
+      setCount(novoValor);
+    } else {
+      setCount(novoValor + ".0")
+    }
+    
   }
 
   return (
