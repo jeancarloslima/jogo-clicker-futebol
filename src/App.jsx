@@ -23,15 +23,15 @@ function App() {
     } else {
       setCount(novoValor + ".0");
     }
-
-    function diminuiDia() {
-      setDiasFaltando(diasFaltando - 1);
-    }
-
-    setInterval(() => {
-      diminuiDia();
-    }, 60000);
   }
+
+  function diminuiDia() {
+    setDiasFaltando(diasFaltando - 1);
+  }
+
+  setInterval(() => {
+    diminuiDia();
+  }, 60000);
 
   return (
     <div className="app">
