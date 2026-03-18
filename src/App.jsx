@@ -22,6 +22,20 @@ function App() {
     }
   }
 
+  function implementaMelhoria(melhoria) {
+    if (melhoria.custo <= count) {
+      let novoMultiplicador = Number((multiplicador + melhoria.multiplicador).toFixed(1));
+      let novaForca = forcaTime + melhoria.forca;
+      let novoContador = Number((count - melhoria.custo).toFixed(1));
+
+      console.log([novoMultiplicador, novaForca, novoContador]);
+
+      setMultiplicador(novoMultiplicador);
+      setForcaTime(novaForca);
+      setCount(novoContador);
+    }
+  }
+
   function diminuiDia() {
     setDiasFaltando(diasFaltando - 1);
   }
@@ -54,7 +68,7 @@ function App() {
 
       <footer>
         <div className="footer-container">
-          <TelaMelhorias />
+          <TelaMelhorias implementaMelhoria={implementaMelhoria} />
         </div>
       </footer>
     </div>
