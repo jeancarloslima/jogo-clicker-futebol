@@ -37,5 +37,17 @@ main {
 
 footer {
   width: 100dvw;
+  max-width: 1000px;
   height: 160px;
+}
+
+@media (min-width: 1000px) {
+  footer {
+    height: auto;
+    margin-bottom: 2rem;
+  }
+
+  .lista-melhorias {
+      gap: 1rem;
+  }
 }
