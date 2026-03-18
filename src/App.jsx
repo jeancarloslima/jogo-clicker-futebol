@@ -6,6 +6,37 @@ import { FaCalendar } from "react-icons/fa6";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { GiSoccerKick } from "react-icons/gi";
 
+const listaMelhorias = [
+  {
+    id: 1,
+    texto: "Pedir dinheiro a amigos",
+    custo: 10,
+    tipo: "multiplicador",
+    efeito: "+0.1",
+  },
+  {
+    id: 2,
+    texto: "Pedir dinheiro a vizinhos",
+    custo: 50,
+    tipo: "multiplicador",
+    efeito: "+0.5",
+  },
+  {
+    id: 3,
+    texto: "Treino de passe",
+    custo: 100,
+    tipo: "forca",
+    efeito: "+50",
+  },
+  {
+    id: 4,
+    texto: "Investidor local",
+    custo: 300,
+    tipo: "multiplicador",
+    efeito: "+2",
+  }
+];
+
 function App() {
   const [count, setCount] = useState(0.0);
   const [multiplicador, setMultiplicador] = useState(0.1);
@@ -24,15 +55,27 @@ function App() {
 
   function implementaMelhoria(melhoria) {
     if (melhoria.custo <= count) {
-      let novoMultiplicador = Number((multiplicador + melhoria.multiplicador).toFixed(1));
+      let novoMultiplicador = Number(
+        (multiplicador + melhoria.multiplicador).toFixed(1),
+      );
       let novaForca = forcaTime + melhoria.forca;
       let novoContador = Number((count - melhoria.custo).toFixed(1));
-
-      console.log([novoMultiplicador, novaForca, novoContador]);
 
       setMultiplicador(novoMultiplicador);
       setForcaTime(novaForca);
       setCount(novoContador);
+
+      const idMelhoria = melhoria.id;
+      
+      const indice = listaMelhorias.findIndex(m => "item-" + m.id === idMelhoria);
+
+      if (indice !== -1) {
+        console.log("A");
+        
+        listaMelhorias.splice(indice, 1);
+      }
+      console.log(listaMelhorias);
+      
     }
   }
 
@@ -68,7 +111,7 @@ function App() {
 
       <footer>
         <div className="footer-container">
-          <TelaMelhorias implementaMelhoria={implementaMelhoria} />
+          <TelaMelhorias listaMelhorias={listaMelhorias} implementaMelhoria={implementaMelhoria} />
         </div>
       </footer>
     </div>

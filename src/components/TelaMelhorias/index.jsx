@@ -3,7 +3,7 @@ import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { IoIosFootball } from "react-icons/io";
 import { GiSoccerKick } from "react-icons/gi";
 
-export default function TelaMelhorias({ implementaMelhoria }) {
+export default function TelaMelhorias({ listaMelhorias, implementaMelhoria }) {
   function pegaValores(item) {
     const id = item.target.id;
     const custo = Number(document.querySelector(`#${id} .custo-melhoria`).textContent);
@@ -21,42 +21,15 @@ export default function TelaMelhorias({ implementaMelhoria }) {
   return (
     <div className="melhorias-container">
       <ul className="lista-melhorias">
-        <li className="item-melhoria" id="item-1" onClick={pegaValores}>
-          <span className="nome-melhoria">Pedir dinheiro a amigos</span>
-          <span className="custo-melhoria">
-            10 <RiMoneyDollarCircleFill />
-          </span>
-          <span className="efeito-melhoria" tipo="multiplicador">
-            +0.1 <IoIosFootball />
-          </span>
-        </li>
-        <li className="item-melhoria">
-          <span className="nome-melhoria">Pedir dinheiro a vizinhos</span>
-          <span className="custo-melhoria">
-            50 <RiMoneyDollarCircleFill />
-          </span>
-          <span className="efeito-melhoria">
-            +0.5 <IoIosFootball />
-          </span>
-        </li>
-        <li className="item-melhoria">
-          <span className="nome-melhoria">Treino de passe</span>
-          <span className="custo-melhoria">
-            100 <RiMoneyDollarCircleFill />
-          </span>
-          <span className="efeito-melhoria">
-            +50 <GiSoccerKick />
-          </span>
-        </li>
-        <li className="item-melhoria">
-          <span className="nome-melhoria">Investidor local</span>
-          <span className="custo-melhoria">
-            300 <RiMoneyDollarCircleFill />
-          </span>
-          <span className="efeito-melhoria">
-            +2 <IoIosFootball />
-          </span>
-        </li>
+        {
+            listaMelhorias.map(item => (
+                <li className="item-melhoria" key={item.id} id={"item"+item.id} onClick={pegaValores}>
+                    <span className="nome-melhoria">{item.texto}</span>
+                    <span className="custo-melhoria">{item.custo} <RiMoneyDollarCircleFill /></span>
+                    <span className="efeito-melhoria" tipo={item.tipo}>{item.efeito} {item.tipo === "multiplicador" ? <IoIosFootball /> : <GiSoccerKick />}</span>
+                </li>
+            )) 
+        }
       </ul>
     </div>
   );
