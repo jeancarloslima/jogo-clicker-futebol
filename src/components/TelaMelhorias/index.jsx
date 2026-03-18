@@ -22,7 +22,7 @@ export default function TelaMelhorias({ listaMelhorias, implementaMelhoria }) {
     <div className="melhorias-container">
       <ul className="lista-melhorias">
         {
-            listaMelhorias.map(item => (
+            listaMelhorias.slice(0, 4).map(item => (
                 <li className="item-melhoria" key={item.id} id={"item-"+item.id} onClick={pegaValores}>
                     <span className="nome-melhoria">{item.texto}</span>
                     <span className="custo-melhoria">{item.custo} <RiMoneyDollarCircleFill /></span>

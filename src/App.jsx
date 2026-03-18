@@ -34,6 +34,20 @@ const listaMelhorias = [
     custo: 300,
     tipo: "multiplicador",
     efeito: "+2",
+  },
+  {
+    id: 5,
+    texto: "Treino de lançamento",
+    custo: 300,
+    tipo: "forca",
+    efeito: "+100",
+  },
+  {
+    id: 6,
+    texto: "Investidor vizinho",
+    custo: 400,
+    tipo: "multiplicador",
+    efeito: "+4",
   }
 ];
 
@@ -70,12 +84,8 @@ function App() {
       const indice = listaMelhorias.findIndex(m => "item-" + m.id === idMelhoria);
 
       if (indice !== -1) {
-        console.log("A");
-        
         listaMelhorias.splice(indice, 1);
       }
-      console.log(listaMelhorias);
-      
     }
   }
 
