@@ -1,9 +1,7 @@
-import { useState } from "react";
 import "./App.css";
+import { useState } from "react";
 import TelaClicker from "./components/TelaClicker";
-import TelaTime from "./components/TelaTime";
 import TelaMelhorias from "./components/TelaMelhorias";
-import TelaJogadores from "./components/TelaJogadores";
 import { FaCalendar } from "react-icons/fa6";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { GiSoccerKick } from "react-icons/gi";
@@ -13,7 +11,6 @@ function App() {
   const [multiplicador, setMultiplicador] = useState(0.1);
   const [diasFaltando, setDiasFaltando] = useState(30);
   const [forcaTime, setForcaTime] = useState(100);
-  const [telaAtual, setTelaAtual] = useState(0);
 
   function handleClick() {
     const novoValor = Number((Number(count) + multiplicador).toFixed(1));
@@ -51,15 +48,13 @@ function App() {
 
       <main>
         <div className="main-container">
-          {telaAtual === 0 && <TelaClicker noClique={handleClick} />}
-          {telaAtual === 1 && <TelaTime />}
+          <TelaClicker noClique={handleClick} />
         </div>
       </main>
 
       <footer>
         <div className="footer-container">
-          {telaAtual === 0 && <TelaMelhorias />}
-          {telaAtual === 1 && <TelaJogadores />}
+          <TelaMelhorias />
         </div>
       </footer>
     </div>
