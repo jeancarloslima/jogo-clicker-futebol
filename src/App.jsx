@@ -7,7 +7,7 @@ import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { GiSoccerKick } from "react-icons/gi";
 import { IoIosFootball } from "react-icons/io";
 
-const listaMelhorias = [
+const listaMelhorias = JSON.parse(localStorage.getItem("lista-melhorias")) || [
   {
     id: 1,
     texto: "Pedir dinheiro a amigos",
@@ -53,10 +53,10 @@ const listaMelhorias = [
 ];
 
 function App() {
-  const [count, setCount] = useState(0.0);
-  const [multiplicador, setMultiplicador] = useState(0.1);
-  const [diasFaltando, setDiasFaltando] = useState(30);
-  const [forcaTime, setForcaTime] = useState(100);
+  const [count, setCount] = useState(Number(localStorage.getItem("count")) || 0.0);
+  const [multiplicador, setMultiplicador] = useState(Number(localStorage.getItem("multiplicador")) || 0.1);
+  const [diasFaltando, setDiasFaltando] = useState(Number(localStorage.getItem("dias-faltando")) || 30);
+  const [forcaTime, setForcaTime] = useState(Number(localStorage.getItem("forca")) || 100);
 
   function handleClick() {
     const novoValor = Number((Number(count) + multiplicador).toFixed(1));
@@ -66,6 +66,8 @@ function App() {
     } else {
       setCount(novoValor + ".0");
     }
+
+    localStorage.setItem("count", novoValor);
   }
 
   function implementaMelhoria(melhoria) {
@@ -89,11 +91,19 @@ function App() {
       if (indice !== -1) {
         listaMelhorias.splice(indice, 1);
       }
+
+      localStorage.setItem("multiplicador", novoMultiplicador);
+      localStorage.setItem("forca", novaForca);
+      localStorage.setItem("count", novoContador);
+      localStorage.setItem("lista-melhorias", JSON.stringify(listaMelhorias));
     }
   }
 
   function diminuiDia() {
-    setDiasFaltando(diasFaltando - 1);
+    let novoDia = diasFaltando - 1;
+
+    setDiasFaltando(novoDia);
+    localStorage.setItem("dias-faltando", novoDia);
   }
 
   setInterval(() => {
