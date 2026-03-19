@@ -5,6 +5,7 @@ import TelaMelhorias from "./components/TelaMelhorias";
 import { FaCalendar } from "react-icons/fa6";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { GiSoccerKick } from "react-icons/gi";
+import { IoIosFootball } from "react-icons/io";
 
 const listaMelhorias = [
   {
@@ -48,7 +49,7 @@ const listaMelhorias = [
     custo: 400,
     tipo: "multiplicador",
     efeito: "+4",
-  }
+  },
 ];
 
 function App() {
@@ -80,8 +81,10 @@ function App() {
       setCount(novoContador);
 
       const idMelhoria = melhoria.id;
-      
-      const indice = listaMelhorias.findIndex(m => "item-" + m.id === idMelhoria);
+
+      const indice = listaMelhorias.findIndex(
+        (m) => "item-" + m.id === idMelhoria,
+      );
 
       if (indice !== -1) {
         listaMelhorias.splice(indice, 1);
@@ -110,6 +113,9 @@ function App() {
           <h3 className="forca-time">
             {forcaTime} <GiSoccerKick />
           </h3>
+          <h3 className="multiplicador">
+            {multiplicador} <IoIosFootball />
+          </h3>
         </div>
       </header>
 
@@ -121,7 +127,10 @@ function App() {
 
       <footer>
         <div className="footer-container">
-          <TelaMelhorias listaMelhorias={listaMelhorias} implementaMelhoria={implementaMelhoria} />
+          <TelaMelhorias
+            listaMelhorias={listaMelhorias}
+            implementaMelhoria={implementaMelhoria}
+          />
         </div>
       </footer>
     </div>

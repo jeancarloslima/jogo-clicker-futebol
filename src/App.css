@@ -35,6 +35,14 @@ main {
   min-width: 90px;
 }
 
+.contagem {
+  font-size: 2rem;
+  position: absolute;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 footer {
   width: 100dvw;
   max-width: 1000px;
