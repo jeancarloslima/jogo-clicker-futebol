@@ -6,6 +6,7 @@ import { FaCalendar } from "react-icons/fa6";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { GiSoccerKick } from "react-icons/gi";
 import { IoIosFootball } from "react-icons/io";
+import TelaPartida from "./components/TelaPartida";
 
 const listaMelhorias = JSON.parse(localStorage.getItem("lista-melhorias")) || [
   {
@@ -52,11 +53,34 @@ const listaMelhorias = JSON.parse(localStorage.getItem("lista-melhorias")) || [
   },
 ];
 
+const listaAdversarios = JSON.parse(
+  localStorage.getItem("lista-adversarios"),
+) || [
+  {
+    id: 1,
+    nome: "Proletario FC",
+    forca: 140,
+  },
+  {
+    id: 2,
+    nome: "Super FC",
+    forca: 200,
+  },
+];
+
 function App() {
-  const [count, setCount] = useState(Number(localStorage.getItem("count")) || 0.0);
-  const [multiplicador, setMultiplicador] = useState(Number(localStorage.getItem("multiplicador")) || 0.1);
-  const [diasFaltando, setDiasFaltando] = useState(Number(localStorage.getItem("dias-faltando")) || 30);
-  const [forcaTime, setForcaTime] = useState(Number(localStorage.getItem("forca")) || 100);
+  const [count, setCount] = useState(
+    Number(localStorage.getItem("count")) || 0.0,
+  );
+  const [multiplicador, setMultiplicador] = useState(
+    Number(localStorage.getItem("multiplicador")) || 0.1,
+  );
+  const [diasFaltando, setDiasFaltando] = useState(
+    Number(localStorage.getItem("dias-faltando")) || 5,
+  );
+  const [forcaTime, setForcaTime] = useState(
+    Number(localStorage.getItem("forca")) || 100,
+  );
 
   function handleClick() {
     const novoValor = Number((Number(count) + multiplicador).toFixed(1));
@@ -100,48 +124,71 @@ function App() {
   }
 
   function diminuiDia() {
-    let novoDia = diasFaltando - 1;
-
-    setDiasFaltando(novoDia);
-    localStorage.setItem("dias-faltando", novoDia);
+    setDiasFaltando(diasFaltando - 1);
+    localStorage.setItem("dias-faltando", diasFaltando - 1);
   }
 
   setInterval(() => {
     diminuiDia();
   }, 60000);
 
+  if (diasFaltando < 1) {
+    let isMaisForte = forcaTime >= listaAdversarios[0].forca;
+
+    setTimeout(() => {
+      setDiasFaltando(5);
+
+      if (isMaisForte) {
+        listaAdversarios.shift();
+      }
+
+      localStorage.setItem("dias-faltando", 5);
+      localStorage.setItem("lista-adversarios", JSON.stringify(listaAdversarios));
+    }, 8000);
+  }
+
   return (
     <div className="app">
       <header>
-        <div className="header-container">
-          <h3 className="dias-faltando">
-            {diasFaltando} <FaCalendar />
-          </h3>
-          <h2 className="contagem">
-            {count} <RiMoneyDollarCircleFill />
-          </h2>
-          <h3 className="forca-time">
-            {forcaTime} <GiSoccerKick />
-          </h3>
-          <h3 className="multiplicador">
-            {multiplicador} <IoIosFootball />
-          </h3>
-        </div>
+        {diasFaltando > 0 && (
+          <div className="header-container">
+            <h3 className="dias-faltando">
+              {diasFaltando} <FaCalendar />
+            </h3>
+            <h2 className="contagem">
+              {count} <RiMoneyDollarCircleFill />
+            </h2>
+            <h3 className="forca-time">
+              {forcaTime} <GiSoccerKick />
+            </h3>
+            <h3 className="multiplicador">
+              {multiplicador} <IoIosFootball />
+            </h3>
+          </div>
+        )}
       </header>
 
       <main>
         <div className="main-container">
-          <TelaClicker noClique={handleClick} />
+          {diasFaltando > 0 && <TelaClicker noClique={handleClick} />}
+          {diasFaltando < 1 && (
+            <TelaPartida
+              adversario={listaAdversarios[0]}
+              forcaTime={forcaTime}
+            />
+          )}
         </div>
       </main>
 
       <footer>
-        <div className="footer-container">
-          <TelaMelhorias
-            listaMelhorias={listaMelhorias}
-            implementaMelhoria={implementaMelhoria}
-          />
-        </div>
+        {diasFaltando > 0 && (
+          <div className="footer-container">
+            <TelaMelhorias
+              listaMelhorias={listaMelhorias}
+              implementaMelhoria={implementaMelhoria}
+            />
+          </div>
+        )}
       </footer>
     </div>
   );
