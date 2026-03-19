@@ -1,13 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./tela-partida.css";
 
 export default function TelaPartida({ adversario, forcaTime }) {
   let isMaisForte = forcaTime >= adversario.forca;
   const [fimPartida, setFimPartida] = useState(false);
 
-  setTimeout(() => {
-    setFimPartida(true);
-  }, 5000);
+  useEffect(() => {
+    const timerPartida = setTimeout(() => {
+      setFimPartida(true);
+    }, 4000);
+
+    return () => clearTimeout(timerPartida);
+  }, []);
 
   return (
     <div className="partida-container">

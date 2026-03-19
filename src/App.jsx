@@ -1,5 +1,5 @@
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TelaClicker from "./components/TelaClicker";
 import TelaMelhorias from "./components/TelaMelhorias";
 import { FaCalendar } from "react-icons/fa6";
@@ -123,29 +123,39 @@ function App() {
     }
   }
 
-  function diminuiDia() {
-    setDiasFaltando(diasFaltando - 1);
-    localStorage.setItem("dias-faltando", diasFaltando - 1);
-  }
+  useEffect(() => {
+    const intervalo = setInterval(() => {
+      setDiasFaltando((diasAnteriores) => {
+        const novoDia = diasAnteriores - 1;
+        localStorage.setItem("dias-faltando", novoDia);
+        return novoDia;
+      });
+    }, 60000);
 
-  setInterval(() => {
-    diminuiDia();
-  }, 60000);
+    return () => clearInterval(intervalo);
+  }, []);
 
-  if (diasFaltando < 1) {
-    let isMaisForte = forcaTime >= listaAdversarios[0].forca;
+  useEffect(() => {
+    if (diasFaltando < 1) {
+      const adversarioAtual = listaAdversarios[0]; 
+      if (!adversarioAtual) return; 
 
-    setTimeout(() => {
-      setDiasFaltando(5);
+      let isMaisForte = forcaTime >= adversarioAtual.forca;
 
-      if (isMaisForte) {
-        listaAdversarios.shift();
-      }
+      const tempoPartida = setTimeout(() => {
+        setDiasFaltando(5);
 
-      localStorage.setItem("dias-faltando", 5);
-      localStorage.setItem("lista-adversarios", JSON.stringify(listaAdversarios));
-    }, 8000);
-  }
+        if (isMaisForte) {
+          listaAdversarios.shift();
+        }
+
+        localStorage.setItem("dias-faltando", 5);
+        localStorage.setItem("lista-adversarios", JSON.stringify(listaAdversarios));
+      }, 10000);
+
+      return () => clearTimeout(tempoPartida);
+    }
+  }, [diasFaltando, forcaTime]);
 
   return (
     <div className="app">
