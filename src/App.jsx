@@ -66,6 +66,21 @@ const listaAdversarios = JSON.parse(
     nome: "Super FC",
     forca: 200,
   },
+  {
+    id: 3,
+    nome: "Atlético do Vale",
+    forca: 300,
+  },
+  {
+    id: 4,
+    nome: "Vanguarda FC",
+    forca: 400,
+  },
+  {
+    id: 5,
+    nome: "Horizonte FC",
+    forca: 500,
+  },
 ];
 
 function App() {
