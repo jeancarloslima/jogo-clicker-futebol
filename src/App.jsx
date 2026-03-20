@@ -51,6 +51,34 @@ const listaMelhorias = JSON.parse(localStorage.getItem("lista-melhorias")) || [
     tipo: "multiplicador",
     efeito: "+4",
   },
+  {
+    id: 7,
+    texto: "Treino de finalização",
+    custo: 400,
+    tipo: "forca",
+    efeito: "+100",
+  },
+  {
+    id: 8,
+    texto: "Investidor secreto",
+    custo: 600,
+    tipo: "multiplicador",
+    efeito: "+10",
+  },
+  {
+    id: 9,
+    texto: "Treino de força",
+    custo: 600,
+    tipo: "forca",
+    efeito: "+100",
+  },
+  {
+    id: 10,
+    texto: "Treino de táticas",
+    custo: 1000,
+    tipo: "forca",
+    efeito: "+200",
+  },
 ];
 
 const listaAdversarios = JSON.parse(
@@ -91,7 +119,7 @@ function App() {
     Number(localStorage.getItem("multiplicador")) || 0.1,
   );
   const [diasFaltando, setDiasFaltando] = useState(
-    Number(localStorage.getItem("dias-faltando")) || 5,
+    Number(localStorage.getItem("dias-faltando")) || 1,
   );
   const [forcaTime, setForcaTime] = useState(
     Number(localStorage.getItem("forca")) || 100,
