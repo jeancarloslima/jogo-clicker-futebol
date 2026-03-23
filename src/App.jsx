@@ -1,12 +1,14 @@
 import "./App.css";
-import { useEffect, useState } from "react";
-import TelaClicker from "./components/TelaClicker";
-import TelaMelhorias from "./components/TelaMelhorias";
+import { useEffect, useRef, useState } from "react";
 import { FaCalendar } from "react-icons/fa6";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { GiSoccerKick } from "react-icons/gi";
 import { IoIosFootball } from "react-icons/io";
+import TelaClicker from "./components/TelaClicker";
+import TelaMelhorias from "./components/TelaMelhorias";
 import TelaPartida from "./components/TelaPartida";
+import clickSound from "./assets/click3.ogg";
+import improvementSound from "./assets/rollover4.ogg";
 
 const listaMelhorias = JSON.parse(localStorage.getItem("lista-melhorias")) || [
   {
@@ -124,6 +126,8 @@ function App() {
   const [forcaTime, setForcaTime] = useState(
     Number(localStorage.getItem("forca")) || 100,
   );
+  const audioClickRef = useRef(new Audio(clickSound));
+  const audioImprovementRef = useRef(new Audio(improvementSound));
 
   function handleClick() {
     const novoValor = Number((Number(count) + multiplicador).toFixed(1));
@@ -135,6 +139,9 @@ function App() {
     }
 
     localStorage.setItem("count", novoValor);
+
+    audioClickRef.current.currentTime = 0;
+    audioClickRef.current.play();
   }
 
   function implementaMelhoria(melhoria) {
@@ -163,6 +170,9 @@ function App() {
       localStorage.setItem("forca", novaForca);
       localStorage.setItem("count", novoContador);
       localStorage.setItem("lista-melhorias", JSON.stringify(listaMelhorias));
+
+      audioImprovementRef.current.currentTime = 0;
+      audioImprovementRef.current.play();
     }
   }
 
@@ -180,8 +190,8 @@ function App() {
 
   useEffect(() => {
     if (diasFaltando < 1) {
-      const adversarioAtual = listaAdversarios[0]; 
-      if (!adversarioAtual) return; 
+      const adversarioAtual = listaAdversarios[0];
+      if (!adversarioAtual) return;
 
       let isMaisForte = forcaTime >= adversarioAtual.forca;
 
@@ -193,7 +203,10 @@ function App() {
         }
 
         localStorage.setItem("dias-faltando", 5);
-        localStorage.setItem("lista-adversarios", JSON.stringify(listaAdversarios));
+        localStorage.setItem(
+          "lista-adversarios",
+          JSON.stringify(listaAdversarios),
+        );
       }, 10000);
 
       return () => clearTimeout(tempoPartida);
