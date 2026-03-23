@@ -121,7 +121,7 @@ function App() {
     Number(localStorage.getItem("multiplicador")) || 0.1,
   );
   const [diasFaltando, setDiasFaltando] = useState(
-    Number(localStorage.getItem("dias-faltando")) || 1,
+    Number(localStorage.getItem("dias-faltando")) || 5,
   );
   const [forcaTime, setForcaTime] = useState(
     Number(localStorage.getItem("forca")) || 100,
