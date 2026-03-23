@@ -15,3 +15,9 @@
     border: 1px solid #FFF;
     transition: .3s;
 }
+
+.botao-click:active {
+    background-color: #3de63d;
+    border-color: #3de63d;
+    transform: scale(130%);
+}
