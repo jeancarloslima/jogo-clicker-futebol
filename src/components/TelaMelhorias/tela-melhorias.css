@@ -32,3 +32,14 @@
     min-width: 60px;
     text-align: right;
 }
+
+@media (min-width: 620px) {
+    .lista-melhorias {
+        gap: 1rem;
+        padding-bottom: 2rem;
+    }   
+
+    .item-melhoria {
+        border-radius: 16px;
+    }
+}
