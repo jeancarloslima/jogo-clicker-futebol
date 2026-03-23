@@ -1,23 +1,24 @@
 .clicker-container {
-    margin: auto;
+  margin: auto;
 }
 
 .botao-click {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    font-size: 4.5rem;
-    cursor: pointer;
-    background-color: #FFF;
-    border: 1px solid #FFF;
-    transition: .3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  font-size: 4.5rem;
+  cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #fff;
+  user-select: none;
+  transition: 0.3s;
 }
 
 .botao-click:active {
-    background-color: #3de63d;
-    border-color: #3de63d;
-    transform: scale(130%);
+  background-color: #3de63d;
+  border-color: #3de63d;
+  transform: scale(130%);
 }
